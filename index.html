@@ -2,7 +2,7 @@
 <html lang="en" id="html">
 <head>
 <meta charset="UTF-8">
-<title>editor</title>
+<title>writeling</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="res/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="stylesheet" type="text/css" href="res/trix.css">
@@ -59,7 +59,6 @@ Trix.config.toolbar.getDefaultHTML = function() { return(`  <span class="trix-bu
 <body>
 
 <header>
-  <button id="btnMenu"><span>menu</span></button>
   <div id="menu">
     <button id="btnNew" class="trans"><span>New</span><span class="hotkey">Ctrl+N</span></button>
     <button id="btnOpen" class="trans"><span>Open…</span><span class="hotkey">Ctrl+O</span></button>
@@ -136,7 +135,6 @@ class stor
   const filenameLabel = document.getElementById('filename');
   const editor = document.querySelector('trix-editor');
 
-  const btnMenu = document.getElementById('btnMenu');
   const btnNew = document.getElementById('btnNew');
   const btnOpen = document.getElementById('btnOpen');
   const btnSave = document.getElementById('btnSave');
@@ -192,6 +190,7 @@ class stor
     editor.editor.loadHTML('');
     currentFileHandle = null;
     setFileName('untitled.html');
+    editor.focus();
   });
 
   // ---------- OPEN ----------
@@ -215,6 +214,7 @@ class stor
       }
     } else {
       fileInput.click();
+      editor.focus();
     }
   });
 
@@ -295,6 +295,7 @@ class stor
       a.remove();
       URL.revokeObjectURL(url);
       flashStatus('Downloaded');
+      editor.focus();
     }
   }
 
@@ -303,11 +304,6 @@ class stor
     const prev = filenameLabel.textContent;
     filenameLabel.textContent = msg + ' — ' + currentFileName;
     setTimeout(() => { filenameLabel.textContent = currentFileName; }, 1500);
-  }
-
-  function toggleMenu()
-  {
-    menu.dispatchEvent(new Event('mouseover '));
   }
 
   function changeTone(val)
@@ -343,7 +339,6 @@ class stor
     storage.set('linelength',val);
   }
 
-  btnMenu.addEventListener('click', () => toggleMenu());
   btnSave.addEventListener('click', () => saveFile(false));
   btnSaveAs.addEventListener('click', () => saveFile(true));
   btnPrint.addEventListener('click', () => window.print());
@@ -383,7 +378,7 @@ class stor
     selectStyle.value = storage.get('style','international'); selectStyle.dispatchEvent(new Event('change', { 'bubbles': true }));
     rangeFontSize.value = storage.get('fontsize','1'); rangeFontSize.dispatchEvent(new Event('input', { 'bubbles': true }));
     rangeLineLength.value = storage.get('linelength','75'); rangeLineLength.dispatchEvent(new Event('input', { 'bubbles': true }));
-    editor.click();
+    editor.focus();
   }
 
   (function() {

@@ -6,7 +6,7 @@
   --bodycolor: #333;
   --bodybg: #fff;
   --bodycolorlight:#999;
-  --border: #ddd;
+  --border: #ccc;
   --accent: #0cf;
   --p-color: #333;
   --h1-color: #333;
@@ -62,7 +62,7 @@ body.dark{
 body.light{
   --bodycolor: #333;
   --bodybg: #fff;
-  --border: #ddd;
+  --border: #ccc;
   --bodycolorlight:#999;
   --accent: #0cf;
   --p-color: #333;
@@ -88,6 +88,8 @@ span#filename{display:block; padding: 0.5em; position:fixed; bottom:0; left:0; b
 
 div#menu{border-right:1px solid var(--myborder); background:var(--bodybg); padding:0; position:fixed; top:0; bottom:0; left:0; transform:translate(calc(-100% + 1.5em),0); transition:all 0.3s; --myborder:transparent; transition-delay:1s;}
 div#menu:hover{transform:none; --myborder:var(--border); transition-delay:0s;}
+div#menu:hover div#opts{transition-delay:0s;}
+
 div#menu button{margin:0; border-radius:0; display:grid; grid-template-columns:1fr 1fr; border:none; width:100%; text-align:left;}
 div#menu button:focus{outline:none; background:var(--border);}
 div#menu span.hotkey{text-align:right; color:var(--bodycolorlight);}
@@ -97,7 +99,7 @@ button:hover { background: var(--border);}
 button.menu{display:block; width:30px; height:30px; border-radius:50%; background:#ccc;}
 button.menu span{display:none;}
 
-div#opts{font-size:0.8em; border-top:1px solid var(--myborder); margin-top:0.5em; padding-top:0.5em;}
+div#opts{font-size:0.8em; border-top:1px solid var(--myborder); margin-top:0.5em; padding-top:0.5em; transition:all 0.3s; transition-delay:1s;}
 div.optitem{padding:0.5em 2em; display:grid; grid-template-columns:1fr 1fr; grid-gap:2em;}
 div#menu select{border-radius:0; border:0; background:var(--bodybg); color:var(--bodycolor);}
 div#menu select:focus{outline:none; background:var(--border);}
