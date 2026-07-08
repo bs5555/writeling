@@ -3,6 +3,7 @@
 @font-face {font-family: 'exxiteicon'; src: url('exxite.woff2') format('woff2'), url('exxite.woff') format('woff'); font-weight: normal; font-style: normal; font-display: block;}
 :root {
   --icon:'exxiteicon';
+  --system: 'lilex','Helvetica', 'Arial', sans-serif;
   --bodycolor: #333;
   --bodybg: #fff;
   --bodycolorlight:#999;
@@ -79,16 +80,18 @@ body.light{
 }
 
 .trans{transition:all 0.3s;}
-body {margin: 0; font-family: 'lilex','Helvetica', 'Arial', sans-serif; background: var(--bodybg); color: var(--bodycolor);}
+body {margin: 0; font-family: var(--system); background: var(--bodybg); color: var(--bodycolor);}
 header {position: fixed; top: 0; z-index: 10;}
 
 input[type=file] { display: none; }
 main {min-height: 80vh;}
 span#filename{display:block; padding: 0.5em; position:fixed; bottom:0; left:0; background:var(--bodybg); font-size:0.8em; z-index:1000;}
 
-div#menu{border-right:1px solid var(--myborder); background:var(--bodybg); padding:0; position:fixed; top:0; bottom:0; left:0; transform:translate(calc(-100% + 1.5em),0); transition:all 0.3s; --myborder:transparent; transition-delay:1s;}
-div#menu:hover{transform:none; --myborder:var(--border); transition-delay:0s;}
-div#menu:hover div#opts{transition-delay:0s;}
+div#menu{border-right:1px solid var(--myborder); background:var(--bodybg); padding:30px 0 0 0; position:fixed; top:0; bottom:0; left:0; transform:translate(calc(-100% + 1.5em),0); transition:all 0.3s; --myborder:transparent; transition-delay:1s;}
+div#menu:hover,div#menu:focus,div#menu:focus-within  {transform:none; --myborder:var(--border); transition-delay:0s;  outline:none;}
+div#menu:hover div#opts,div#menu:focus div#opts,div#menu:focus-within div#opts{transition-delay:0s;}
+div#menu:after{content:'^'; font-family:var(--icon); display:block; position:absolute; top:0.2em; right:0; font-size:1.4em; transition:all 0.5s; transition-delay:1s;}
+div#menu:hover:after{opacity:0; transition-delay:0s;}
 
 div#menu button{margin:0; border-radius:0; display:grid; grid-template-columns:1fr 1fr; border:none; width:100%; text-align:left;}
 div#menu button:focus{outline:none; background:var(--border);}
@@ -102,6 +105,7 @@ button.menu span{display:none;}
 div#opts{font-size:0.8em; border-top:1px solid var(--myborder); margin-top:0.5em; padding-top:0.5em; transition:all 0.3s; transition-delay:1s;}
 div.optitem{padding:0.5em 2em; display:grid; grid-template-columns:1fr 1fr; grid-gap:2em;}
 div#menu select{border-radius:0; border:0; background:var(--bodybg); color:var(--bodycolor);}
+div#menu select, div#menu option{font-family:var(--system);}
 div#menu select:focus{outline:none; background:var(--border);}
 div#menu input[type=range]{height:24px;}
 
@@ -121,12 +125,14 @@ div#menu input[type=range]:hover::-moz-range-thumb {background:var(--border);}
 div#menu input[type=range]:focus::-moz-range-thumb {background:var(--border);}
 div#menu input[type="range"]::-moz-range-progress {background: transparent;}
 
+div#menu label{color:var(--bodycolorlight);}
+
 
 
 trix-editor{height:calc(100vh - 60px); overflow:auto; max-width: 75ch; margin:0 auto; padding:10px 50px 70vh 50px; box-sizing:border-box;}
-trix-editor {scrollbar-color: var(--bodybgaccent) var(--bodybg); border-left:1px dotted var(--bodycolorlight);border-left:1px solid color-mix(in lch, var(--bodycolor), transparent 90%)}
+trix-editor {scrollbar-color: var(--border) var(--bodybg); border-left:1px dotted var(--bodycolorlight);border-left:1px solid color-mix(in lch, var(--bodycolor), transparent 90%)}
 trix-editor::-webkit-scrollbar {width: 10px; height: 10px;}
-trix-editor::-webkit-scrollbar-thumb {background: var(--bodybgaccent)}
+trix-editor::-webkit-scrollbar-thumb {background: var(--border)}
 trix-editor::-webkit-scrollbar-track {background: var(--bodybg);}
 trix-toolbar .trix-button-row {max-width: 800px;margin: 0 auto;}
 trix-toolbar .trix-button--icon:before{display:block; font-family:var(--icon); color:var(--bodycolor); font-size:1.3em; text-align:center; text-indent:0;}
@@ -139,7 +145,7 @@ trix-toolbar .trix-button { position: relative; float: left; color: rgba(0, 0, 0
 trix-toolbar .trix-button.trix-active {background:rgba(0,204,255,0.2); color: black; }
 trix-toolbar .trix-button:not(:disabled) {cursor: pointer; }
 trix-toolbar .trix-button:disabled {color: rgba(0, 0, 0, 0.125); }
-trix-toolbar .trix-button:hover{background-color:var(--bodybgaccent);}
+trix-toolbar .trix-button:hover{background-color:var(--border);}
 trix-toolbar .trix-button:disabled:hover{background-color:transparent;}
 trix-toolbar .trix-button--icon { font-size: inherit; width: 2.6em; height: 1.6em; max-width: calc(0.8em + 4vw); text-indent: -9999px;}
 trix-toolbar .trix-button--icon::before {display: inline-block; position: absolute; top: 0; right: 0; bottom: 0; left: 0; opacity: 0.6; content: ''; background-position: center; background-repeat: no-repeat; background-size: contain;}
@@ -181,8 +187,27 @@ trix-toolbar .trix-button--icon::before {display: inline-block; position: absolu
   trix-toolbar .trix-button--dialog:hover{background:var(--accent);}
 
   @media print {
+    body, body.dark{
+      --bodycolor:#000;
+      --bodybg:#fff;
+      --border: transparent;
+      --bodycolorlight:transparent;
+      --accent: transparent;
+      --p-color: #000;
+      --h1-color: #000;
+      --h2-color: #000;
+      --h3-color: #000;
+      --h4-color: #000;
+      --h5-color: #000;
+      --h6-color: #000;
+      --link: #369;
+      --visited:#369;
+      --hover:#0cf;
+      --active:#0cf;
+    }
     trix-toolbar {display:none;}
     trix-editor {overflow:visible; height:auto;}
+    trix-editor {border-left:none;}
     header{display:none;}
     span#filename{display:none;}
   }

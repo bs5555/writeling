@@ -17,7 +17,7 @@ TODO
  - Autosave
  - Message system
  - Language setter++++++
- - Change classic font to Bembo Monotype clone
+ - Change classic font to Bembo Monotype clone++++++++
 */
 
 const editorE1 = document.querySelector('trix-editor');
@@ -59,15 +59,15 @@ Trix.config.toolbar.getDefaultHTML = function() { return(`  <span class="trix-bu
 <body>
 
 <header>
-  <div id="menu">
-    <button id="btnNew" class="trans"><span>New</span><span class="hotkey">Ctrl+N</span></button>
-    <button id="btnOpen" class="trans"><span>Open…</span><span class="hotkey">Ctrl+O</span></button>
-    <button id="btnSave" class="trans"><span>Save</span><span class="hotkey">Ctrl+S</span></button>
-    <button id="btnSaveAs" class="trans"><span>Save As…</span><span class="hotkey">Ctrl+Shift+S</span></button>
-    <button id="btnPrint" class="trans"><span>Print…</span><span class="hotkey">Ctrl+P</span></button>
+  <div id="menu" tabindex="0" role="complementary" aria-label="Main menu and settings">
+    <button id="btnNew" class="trans"><span>New</span><span class="hotkey">Ctrl/Cmd+N</span></button>
+    <button id="btnOpen" class="trans"><span>Open…</span><span class="hotkey">Ctrl/Cmd+O</span></button>
+    <button id="btnSave" class="trans"><span>Save</span><span class="hotkey">Ctrl/Cmd+S</span></button>
+    <button id="btnSaveAs" class="trans"><span>Save As…</span><span class="hotkey">Ctrl/Cmd+Shift+S</span></button>
+    <button id="btnPrint" class="trans"><span>Print…</span><span class="hotkey">Ctrl/Cmd+P</span></button>
     <div id="opts">
       <div class="optitem">
-        <label label-for="lang">Document language</label>
+        <label label-for="lang">Text language</label>
         <select id="lang" value="en">
           <option value="en">English</option>
           <option value="hu">Hungarian</option>
@@ -347,20 +347,19 @@ class stor
   selectStyle.addEventListener('change', () => changeStyle(selectStyle.value));
   rangeFontSize.addEventListener('input', () => changeFontSize(rangeFontSize.value));
   rangeLineLength.addEventListener('input', () => changeLineLength(rangeLineLength.value));
+
   // Keyboard shortcuts
   document.addEventListener('keydown', (e) => {
-    const mod = e.ctrlKey || e.metaKey;
-    if (mod && e.key.toLowerCase() === 's') {
-      e.preventDefault();
-      saveFile(e.shiftKey);
-    }
-    if (mod && e.key.toLowerCase() === 'o') {
-      e.preventDefault();
-      document.getElementById('btnOpen').click();
-    }
-    if (mod && e.key.toLowerCase() === 'n') {
-      e.preventDefault();
-      document.getElementById('btnNew').click();
+    if (!(e.metaKey || e.ctrlKey)) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    console.log(e.key.toLowerCase());
+    switch (e.key.toLowerCase())
+    {
+      case 's' : saveFile(e.shiftKey); break;
+      case 'o' : document.getElementById('btnOpen').click(); break;
+      case 'n' : document.getElementById('btnNew').click(); break;
+      case 'p' : window.print(); break;
     }
   });
 
