@@ -87,10 +87,10 @@ input[type=file] { display: none; }
 main {min-height: 80vh;}
 span#filename{display:block; padding: 0.5em; position:fixed; bottom:0; left:0; background:var(--bodybg); font-size:0.8em; z-index:1000;}
 
-div#menu{border-right:1px solid var(--myborder); background:var(--bodybg); padding:30px 0 0 0; position:fixed; top:0; bottom:0; left:0; transform:translate(calc(-100% + 1.5em),0); transition:all 0.3s; --myborder:transparent; transition-delay:1s;}
+div#menu{border-right:1px solid var(--myborder); background:var(--bodybg); padding:30px 0 0 0; position:fixed; top:0; bottom:0; left:0; transform:translate(calc(-100% + 1.5em),0); transition:all 0.3s, background-color 0; --myborder:transparent; transition-delay:1s;}
 div#menu:hover,div#menu:focus,div#menu:focus-within  {transform:none; --myborder:var(--border); transition-delay:0s;  outline:none;}
 div#menu:hover div#opts,div#menu:focus div#opts,div#menu:focus-within div#opts{transition-delay:0s;}
-div#menu:after{content:'^'; font-family:var(--icon); display:block; position:absolute; top:0.2em; right:0; font-size:1.4em; transition:all 0.5s; transition-delay:1s;}
+div#menu:after{content:'\005E'; font-family:var(--icon); display:block; position:absolute; top:0.2em; right:0; font-size:1.4em; transition:all 0.5s; transition-delay:1s;}
 div#menu:hover:after{opacity:0; transition-delay:0s;}
 
 div#menu button{margin:0; border-radius:0; display:grid; grid-template-columns:1fr 1fr; border:none; width:100%; text-align:left;}
@@ -127,6 +127,8 @@ div#menu input[type="range"]::-moz-range-progress {background: transparent;}
 
 div#menu label{color:var(--bodycolorlight);}
 
+div#msgholder{position:fixed; top:0; left:0; right:0;}
+
 
 
 trix-editor{height:calc(100vh - 60px); overflow:auto; max-width: 75ch; margin:0 auto; padding:10px 50px 70vh 50px; box-sizing:border-box;}
@@ -153,31 +155,31 @@ trix-toolbar .trix-button--icon::before {display: inline-block; position: absolu
   trix-toolbar .trix-button--icon:disabled::before {opacity: 0.125; }
 
   trix-toolbar .trix-button--icon:before{display:block; font-family:var(--icon); color:var(--bodycolor); font-size:1.3em; text-align:center; text-indent:0;}
-  trix-toolbar .trix-button--icon-attach::before {content:'~';}
-  trix-toolbar .trix-button--icon-bold::before {content:'D';}
-  trix-toolbar .trix-button--icon-italic::before {content:'C';}
-  trix-toolbar .trix-button--icon-link::before {content:'{';}
+  trix-toolbar .trix-button--icon-attach::before {content:'\007E';}
+  trix-toolbar .trix-button--icon-bold::before {content:'\0044';}
+  trix-toolbar .trix-button--icon-italic::before {content:'\0043';}
+  trix-toolbar .trix-button--icon-link::before {content:'\007B';}
   trix-toolbar .trix-button--icon-strike::before {content:'';}
-  trix-toolbar .trix-button--icon-quote::before {content:'à';}
-  trix-toolbar .trix-button--icon-heading-1::before {content:'E';}
-  trix-toolbar .trix-button--icon-heading-2::before {content:'F';}
-  trix-toolbar .trix-button--icon-heading-3::before {content:'G';}
-  trix-toolbar .trix-button--icon-heading-4::before {content:'H';}
-  trix-toolbar .trix-button--icon-heading-5::before {content:'I';}
-  trix-toolbar .trix-button--icon-heading-6::before {content:'ï';}
-  trix-toolbar .trix-button--icon-code::before {content:'J';}
-  trix-toolbar .trix-button--icon-bullet-list::before {content:'B';}
-  trix-toolbar .trix-button--icon-number-list::before {content:'A';}
-  trix-toolbar .trix-button--icon-undo::before {content:'Ä';}
-  trix-toolbar .trix-button--icon-redo::before {content:'Ë';}
-  trix-toolbar .trix-button--icon-decrease-nesting-level::before {content:'Ü';}
-  trix-toolbar .trix-button--icon-increase-nesting-level::before {content:'Ï';}
-  trix-toolbar .trix-button--icon-hr::before {content:'(';}
-  trix-toolbar .trix-button--icon-q::before {content:'à';}
-  trix-toolbar .trix-button--icon-strike::before {content:'ñ';}
-  trix-toolbar .trix-button--icon-mark::before {content:'Ñ';}
-  trix-toolbar .trix-button--icon-sub::before {content:'û';}
-  trix-toolbar .trix-button--icon-sup::before {content:'Û';}
+  trix-toolbar .trix-button--icon-quote::before {content:'\00E0';}
+  trix-toolbar .trix-button--icon-heading-1::before {content:'\0045';}
+  trix-toolbar .trix-button--icon-heading-2::before {content:'\0046';}
+  trix-toolbar .trix-button--icon-heading-3::before {content:'\0047';}
+  trix-toolbar .trix-button--icon-heading-4::before {content:'\0048';}
+  trix-toolbar .trix-button--icon-heading-5::before {content:'\0049';}
+  trix-toolbar .trix-button--icon-heading-6::before {content:'\00EF';}
+  trix-toolbar .trix-button--icon-code::before {content:'\004A';}
+  trix-toolbar .trix-button--icon-bullet-list::before {content:'\004A';}
+  trix-toolbar .trix-button--icon-number-list::before {content:'\0041';}
+  trix-toolbar .trix-button--icon-undo::before {content:'\00C4';}
+  trix-toolbar .trix-button--icon-redo::before {content:'\00CB';}
+  trix-toolbar .trix-button--icon-decrease-nesting-level::before {content:'\00DC';}
+  trix-toolbar .trix-button--icon-increase-nesting-level::before {content:'\00CF';}
+  trix-toolbar .trix-button--icon-hr::before {content:'\0028';}
+  trix-toolbar .trix-button--icon-q::before {content:'\00E0';}
+  trix-toolbar .trix-button--icon-strike::before {content:'\00F1';}
+  trix-toolbar .trix-button--icon-mark::before {content:'\00D1';}
+  trix-toolbar .trix-button--icon-sub::before {content:'\00FB';}
+  trix-toolbar .trix-button--icon-sup::before {content:'\00DB';}
 
   trix-toolbar .trix-dialog{border-top:0; border-radius:0; box-shadow:var(--ifcshadow); background-color:var(--bodybgaccent);}
   trix-toolbar .trix-dialog__link-fields{align-items:center; gap:10px;}

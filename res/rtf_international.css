@@ -1,7 +1,7 @@
 @font-face {font-family:'notosans'; src:url('noto_sans_display_normal.woff2') format('woff2-variations'); font-weight:400; font-style:normal;}
 @font-face {font-family:'notosans'; src:url('noto_sans_display_italic.woff2') format('woff2-variations'); font-weight:400; font-style:italic;}
 :root {--notosans:'notosans', 'Arial', 'Helvetica', 'Roboto', sans-serif;}
-main {--g-fs:1em; --p-fs:1.000em; --p-lh:2.000em; --p-m:2.000em 0 2.000em 0; --h1-fs:2.571em; --h1-lh:1.556em; --h1-m:1.556em 0 0.778em 0; --h2-fs:1.877em; --h2-lh:1.066em; --h2-m:2.131em 0 1.066em 0; --h3-fs:1.370em; --h3-lh:1.460em; --h3-m:1.460em 0 1.460em 0; --h4-fs:1.000em; --h4-lh:2.000em; --h4-m:2.000em 0 2.000em 0; --h5-fs:1.000em; --h5-lh:2.000em; --h5-m:2.000em 0 2.000em 0; --h6-fs:1.000em; --h6-lh:2.000em; --h6-m:2.000em 0 2.000em 0; --global-fontfamily:'notosans'; --h1-fontfamily:'notosans'; --h2-fontfamily:'notosans'; --h3-fontfamily:'notosans'; --h4-fontfamily:'notosans'; --h5-fontfamily:'notosans'; --h6-fontfamily:'notosans'; --indent:1em;}
+main {--g-fs:1em; --p-fs:1.000em; --p-lh:2.000em; --p-m:2.000em 0 2.000em 0; --h1-fs:2.571em; --h1-lh:1.556em; --h1-m:1.556em 0 0.778em 0; --h2-fs:1.877em; --h2-lh:1.066em; --h2-m:2.131em 0 1.066em 0; --h3-fs:1.370em; --h3-lh:1.460em; --h3-m:1.460em 0 1.460em 0; --h4-fs:1.000em; --h4-lh:2.000em; --h4-m:2.000em 0 2.000em 0; --h5-fs:1.000em; --h5-lh:2.000em; --h5-m:2.000em 0 2.000em 0; --h6-fs:1.000em; --h6-lh:2.000em; --h6-m:2.000em 0 2.000em 0; --global-fontfamily:var(--notosans); --h1-fontfamily:var(--notosans); --h2-fontfamily:var(--notosans); --h3-fontfamily:var(--notosans); --h4-fontfamily:var(--notosans); --h5-fontfamily:var(--notosans); --h6-fontfamily:var(--notosans); --indent:1em;}
 main p {font-weight:normal; font-style:normal;}
 main h1 {font-weight:normal; font-style:normal;}
 main h2 {font-weight:normal; font-style:normal;}
@@ -54,14 +54,3 @@ main sup, sub {vertical-align:baseline; position:relative; top:-0.4em;}
 main sub {top:0.4em;}
 main address {font-size:var(--p-fs); line-height:var(--p-lh); margin:var(--p-m);}
 main pre {font-size:var(--p-fs); line-height:var(--p-lh); margin:var(--p-m);}
-
-body.lineend main p:after {content:'\00B6'; color:var(--accent);}
-body.lineend main h1:after{content:'\00B6'; color:var(--accent);}
-body.lineend main h2:after{content:'\00B6'; color:var(--accent);}
-body.lineend main h3:after{content:'\00B6'; color:var(--accent);}
-body.lineend main h4:after{content:'\00B6'; color:var(--accent);}
-body.lineend main h5:after{content:'\00B6'; color:var(--accent);}
-body.lineend main h6:after{content:'\00B6'; color:var(--accent);}
-body.lineend main li:after{content:'\00B6'; color:var(--accent);}
-body.lineend main br{content:'';}
-body.lineend main br:after{content:'\21B2\A'; white-space: pre; color:var(--accent);}
