@@ -13,8 +13,8 @@
 /*
 TODO
  - CSS++++++
- - Hotkeys on menu commands
- - Autosave
+ - Hotkeys on menu commands++++++
+ - Autosave+++++++
  - Message system
  - Language setter++++++
  - Change classic font to Bembo Monotype clone++++++++
@@ -76,6 +76,15 @@ Trix.config.toolbar.getDefaultHTML = function() { return(`  <span class="trix-bu
         </select>
       </div>
       <div class="optitem">
+        <label label-for="auto">Autosave</label>
+        <select id="auto" value="20">
+          <option value="0">no auto save</option>
+          <option value="20">every 20 sec</option>
+          <option value="60">every minute</option>
+          <option value="600">every 10 minute</option>
+        </select>
+      </div>
+      <div class="optitem">
         <label label-for="style">Style</label>
         <select id="style" value="international">
           <option value="international">international</option>
@@ -128,6 +137,17 @@ class stor
   }
 }
 
+class xmsg
+{
+  toaster(msg,level)
+  {
+
+  }
+  floater(msg,level,txt)
+  {
+
+  }
+}
 
   const body = document.getElementsByTagName('body')[0];
 
@@ -141,6 +161,7 @@ class stor
   const btnSaveAs = document.getElementById('btnSaveAs');
   const btnPrint = document.getElementById('btnPrint');
   const selectLang = document.getElementById('lang');
+  const selectAuto = document.getElementById('auto');
   const selectTone = document.getElementById('tone');
   const selectStyle = document.getElementById('style');
   const rangeFontSize = document.getElementById('fontsize');
@@ -148,6 +169,7 @@ class stor
   const menu = document.getElementById('menu');
 
   let storage = new stor();
+  let autosave = null;
 
   let currentFileName = 'untitled.html';
   let currentFileHandle = null; // File System Access API handle, if supported
@@ -339,10 +361,20 @@ class stor
     storage.set('linelength',val);
   }
 
+  function changeAuto(val)
+  {
+    if(autosave !== null) clearTimeout(autosave);
+    if(val > 0) setTimeout(function(){
+      if(currentFileName  !== 'untitled.html') saveFile(false);
+    },parseInt(val) * 1000);
+    storage.set('auto',val);
+  }
+
   btnSave.addEventListener('click', () => saveFile(false));
   btnSaveAs.addEventListener('click', () => saveFile(true));
   btnPrint.addEventListener('click', () => window.print());
   selectLang.addEventListener('change', () => changeLang(selectLang.value));
+  selectAuto.addEventListener('change', () => changeAuto(selectAuto.value));
   selectTone.addEventListener('change', () => changeTone(selectTone.value));
   selectStyle.addEventListener('change', () => changeStyle(selectStyle.value));
   rangeFontSize.addEventListener('input', () => changeFontSize(rangeFontSize.value));
@@ -353,7 +385,6 @@ class stor
     if (!(e.metaKey || e.ctrlKey)) return;
     e.preventDefault();
     e.stopImmediatePropagation();
-    console.log(e.key.toLowerCase());
     switch (e.key.toLowerCase())
     {
       case 's' : saveFile(e.shiftKey); break;
@@ -373,6 +404,7 @@ class stor
   function init()
   {
     selectLang.value = storage.get('lang','en'); selectLang.dispatchEvent(new Event('change', { 'bubbles': true }));
+    selectAuto.value = storage.get('auto','20'); selectAuto.dispatchEvent(new Event('change', { 'bubbles': true }));
     selectTone.value = storage.get('tone','auto'); selectTone.dispatchEvent(new Event('change', { 'bubbles': true }));
     selectStyle.value = storage.get('style','international'); selectStyle.dispatchEvent(new Event('change', { 'bubbles': true }));
     rangeFontSize.value = storage.get('fontsize','1'); rangeFontSize.dispatchEvent(new Event('input', { 'bubbles': true }));
