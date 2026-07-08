@@ -1,6 +1,6 @@
-@font-face {font-family:'lora'; src:url('lora_normal.woff2') format('woff2-variations'); font-weight:400; font-style:normal;}
-@font-face {font-family:'lora'; src:url('lora_italic.woff2') format('woff2-variations'); font-weight:400; font-style:italic;}
-:root {--lora:'lora', 'Arial', 'Helvetica', 'Roboto', sans-serif; }
+@font-face {font-family:'garamond'; src:url('garamond.woff2') format('woff2-variations'); font-weight:400; font-style:normal;}
+@font-face {font-family:'garamond'; src:url('garamond_italic.woff2') format('woff2-variations'); font-weight:400; font-style:italic;}
+:root {--classic:'garamond', 'Arial', 'Helvetica', 'Roboto', sans-serif; }
 
 main{
   --g-fs:1em;
@@ -25,13 +25,13 @@ main{
   --h6-fs:1.000em;
   --h6-lh:2.000em;
   --h6-m:2.000em 0 2.000em 0;
-  --global-fontfamily:'lora';
-  --h1-fontfamily:'lora';
-  --h2-fontfamily:'lora';
-  --h3-fontfamily:'lora';
-  --h4-fontfamily:'lora';
-  --h5-fontfamily:'lora';
-  --h6-fontfamily:'lora';
+  --global-fontfamily:'classic';
+  --h1-fontfamily:'classic';
+  --h2-fontfamily:'classic';
+  --h3-fontfamily:'classic';
+  --h4-fontfamily:'classic';
+  --h5-fontfamily:'classic';
+  --h6-fontfamily:'classic';
   --indent:1em;
 }
 main{letter-spacing: 0.04em;}
