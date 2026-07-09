@@ -56,7 +56,7 @@ Trix.config.toolbar.getDefaultHTML = function() { return(`  <span class="trix-bu
     <button id="btnSave" class="trans"><span>Save</span><span class="hotkey">Ctrl/Cmd+S</span></button>
     <button id="btnSaveAs" class="trans"><span>Save As…</span><span class="hotkey">Ctrl/Cmd+Shift+S</span></button>
     <button id="btnPrint" class="trans"><span>Print…</span><span class="hotkey">Ctrl/Cmd+P</span></button>
-    <div id="opts">
+    <div class="opts">
       <div class="optitem">
         <label label-for="lang">Text language</label>
         <select id="lang" value="en">
@@ -75,6 +75,8 @@ Trix.config.toolbar.getDefaultHTML = function() { return(`  <span class="trix-bu
           <option value="600">every 10 minute</option>
         </select>
       </div>
+    </div>
+     <div class="opts">
       <div class="optitem">
         <label label-for="style">Style</label>
         <select id="style" value="international">
