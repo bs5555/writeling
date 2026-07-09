@@ -10,16 +10,6 @@
 <script type="text/javascript" src="res/trix.js"></script>
 <script>
 
-/*
-TODO
- - CSS++++++
- - Hotkeys on menu commands++++++
- - Autosave+++++++
- - Message system
- - Language setter++++++
- - Change classic font to Bembo Monotype clone++++++++
-*/
-
 const editorE1 = document.querySelector('trix-editor');
 
 
@@ -57,7 +47,7 @@ Trix.config.toolbar.getDefaultHTML = function() { return(`  <span class="trix-bu
 <link rel="stylesheet" id="contentstyle" href="res/rtf_classic.css">
 </head>
 <body>
-
+<div id="msgholder"></div>
 <header>
   <div id="menu" tabindex="0" role="complementary" aria-label="Main menu and settings">
     <button id="btnNew" class="trans"><span>New</span><span class="hotkey">Ctrl/Cmd+N</span></button>
@@ -139,13 +129,57 @@ class stor
 
 class xmsg
 {
-  toaster(msg,level)
+  toaster(msg, type = 'info')
   {
-
+    document.querySelectorAll('.toast').forEach(el => el.remove());
+    const buf = document.createElement('div');
+    buf.className = `toast ${type}`;
+    buf.setAttribute('role', 'alert');
+    buf.innerHTML = `<p>${msg}</p>`;
+    document.body.appendChild(buf);
+    setTimeout(() => {
+      buf.remove();
+    }, 5000);
   }
-  floater(msg,level,txt)
-  {
 
+  floater(title, txt, type = 'info')
+  {
+    // Remove any existing toasts/floats
+    document.querySelectorAll('.float').forEach(el => el.remove());
+
+    // Create main float element
+    const buf = document.createElement('div');
+    buf.className = `float ${type}`;
+    buf.setAttribute('role', 'alert');
+
+    buf.innerHTML = `
+      ${title ? `<p><strong>${title}</strong></p>` : ''}
+      ${txt ? `<p>${txt}</p>` : ''}
+    `;
+
+    // Create close button
+    const close = document.createElement('a');
+    close.className = 'close';
+    close.title = 'close';
+    close.href = 'javascript:void(0)';
+    close.innerHTML = '<span>close</span>';
+
+    // Close handler
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      buf.remove();
+    });
+
+    // Append everything
+    buf.appendChild(close);
+    const holder = document.getElementById('msgholder');
+    holder.appendChild(buf);
+  }
+
+  // Helper method (equivalent to your old this.cast)
+  cast(content, before = '', after = '')
+  {
+    return content ? `${before}${content}${after}` : '';
   }
 }
 
@@ -169,6 +203,7 @@ class xmsg
   const menu = document.getElementById('menu');
 
   let storage = new stor();
+  let msg = new xmsg();
   let autosave = null;
 
   let currentFileName = 'untitled.html';
@@ -321,11 +356,13 @@ class xmsg
     }
   }
 
-  function flashStatus(msg)
+  function flashStatus(xmsg)
   {
-    const prev = filenameLabel.textContent;
-    filenameLabel.textContent = msg + ' — ' + currentFileName;
-    setTimeout(() => { filenameLabel.textContent = currentFileName; }, 1500);
+    //const prev = filenameLabel.textContent;
+    //filenameLabel.textContent = xmsg + ' — ' + currentFileName;
+    //setTimeout(() => { filenameLabel.textContent = currentFileName; }, 1500);
+    msg.toaster(xmsg + ' — ' + currentFileName,'ok');
+
   }
 
   function changeTone(val)
@@ -394,11 +431,13 @@ class xmsg
     }
   });
 
-  if (!supportsFSAccess) {
-    const note = document.createElement('span');
-    note.id = 'status';
-    note.textContent = '(using download fallback — File System Access API not supported in this browser)';
-    document.querySelector('header').appendChild(note);
+  if(!supportsFSAccess)
+  {
+    //const note = document.createElement('span');
+    //note.id = 'status';
+    //note.textContent = '(using download fallback — File System Access API not supported in this browser)';
+    //document.querySelector('header').appendChild(note);
+    msg.floater('Using download fallback at file save','File Systam API supported by webkit based browsers');
   }
 
   function init()
