@@ -278,7 +278,7 @@ trix-toolbar .trix-button--icon::before {display: inline-block; position: absolu
     }
     trix-toolbar {display:none;}
     trix-editor {overflow:visible; height:auto;}
-    trix-editor {border-left:none;}
+    trix-editor {border-left:none; padding:0;}
     header{display:none;}
     span#filename{display:none;}
   }
