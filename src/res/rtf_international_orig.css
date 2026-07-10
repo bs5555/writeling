@@ -1,0 +1,56 @@
+@font-face {font-family:'notosans'; src:url('noto_sans_display_normal.woff2') format('woff2-variations'); font-weight:400; font-style:normal;}
+@font-face {font-family:'notosans'; src:url('noto_sans_display_italic.woff2') format('woff2-variations'); font-weight:400; font-style:italic;}
+:root {--notosans:'notosans', 'Arial', 'Helvetica', 'Roboto', sans-serif;}
+main {--g-fs:1em; --p-fs:1.000em; --p-lh:2.000em; --p-m:2.000em 0 2.000em 0; --h1-fs:2.571em; --h1-lh:1.556em; --h1-m:1.556em 0 0.778em 0; --h2-fs:1.877em; --h2-lh:1.066em; --h2-m:2.131em 0 1.066em 0; --h3-fs:1.370em; --h3-lh:1.460em; --h3-m:1.460em 0 1.460em 0; --h4-fs:1.000em; --h4-lh:2.000em; --h4-m:2.000em 0 2.000em 0; --h5-fs:1.000em; --h5-lh:2.000em; --h5-m:2.000em 0 2.000em 0; --h6-fs:1.000em; --h6-lh:2.000em; --h6-m:2.000em 0 2.000em 0; --global-fontfamily:var(--notosans); --h1-fontfamily:var(--notosans); --h2-fontfamily:var(--notosans); --h3-fontfamily:var(--notosans); --h4-fontfamily:var(--notosans); --h5-fontfamily:var(--notosans); --h6-fontfamily:var(--notosans); --indent:1em;}
+main p {font-weight:normal; font-style:normal;}
+main h1 {font-weight:normal; font-style:normal;}
+main h2 {font-weight:normal; font-style:normal;}
+main h3 {font-weight:normal; font-style:normal;}
+main h5 {font-weight:normal; font-style:normal;}
+main h6 {font-weight:normal; font-style:normal;}
+main p {font-variation-settings:'wght' 400, 'wdth' 100;}
+main h1 {font-variation-settings:'wght' 550, 'wdth' 100;}
+main h2 {font-variation-settings:'wght' 560, 'wdth' 100;}
+main h3 {font-variation-settings:'wght' 580, 'wdth' 100;}
+main h4 {font-variation-settings:'wght' 670, 'wdth' 100;}
+main h5 {font-variation-settings:'wght' 580, 'wdth' 100;}
+main h6 {font-variation-settings:'wght' 650, 'wdth' 100;}
+main strong {font-variation-settings:'wght' 610, 'wdth' 100;}
+main b {font-variation-settings:'wght' 610, 'wdth' 100;}
+main i {font-style:italic;}
+main em {font-style:italic;}
+main {font-size:var(--g-fs); font-family:var(--global-fontfamily); color:var(--p-color); font-variant-ligatures:normal; font-optical-sizing:auto;}
+main p {font-size:var(--p-fs); line-height:var(--p-lh); margin:var(--p-m); hyphens:auto; text-align:justify;}
+main h1 {font-size:var(--h1-fs); line-height:var(--h1-lh); margin:var(--h1-m); color:var(--h1-color); font-family:var(--h1-fontfamily); text-wrap:balance;}
+main h2 {font-size:var(--h2-fs); line-height:var(--h2-lh); margin:var(--h2-m); color:var(--h2-color); font-family:var(--h2-fontfamily); text-wrap:balance;}
+main h3 {font-size:var(--h3-fs); line-height:var(--h3-lh); margin:var(--h3-m); color:var(--h3-color); font-family:var(--h3-fontfamily); text-wrap:balance;}
+main h4 {font-size:var(--h4-fs); line-height:var(--h4-lh); margin:var(--h4-m); color:var(--h4-color); font-family:var(--h4-fontfamily); text-wrap:balance;}
+main h5 {font-size:var(--h5-fs); line-height:var(--h5-lh); margin:var(--h5-m); color:var(--h5-color); font-family:var(--h5-fontfamily); text-wrap:balance;}
+main h6 {font-size:var(--h6-fs); line-height:var(--h6-lh); margin:var(--h6-m); color:var(--h6-color); font-family:var(--h6-fontfamily); text-wrap:balance;}
+main a{text-decoration:underline; cursor:pointer;}
+main a:link {color:var(--link);}
+main a:visited {color:var(--visited);}
+main a:hover {color:var(--hover);}
+main a:active {color:var(--active);}
+main ol {list-style-type:decimal; margin:var(--p-m); margin-left:var(--indent); font-size:var(--p-fs); line-height:var(--p-lh);}
+main ul {list-style-type:disc; margin:var(--p-m); margin-left:var(--indent); font-size:var(--p-fs); line-height:var(--p-lh);}
+main li ol {margin:0 0 0 var(--indent); font-size:1em;}
+main li ul {margin:0 0 0 var(--indent); font-size:1em;}
+main dl {margin:var(--p-m); font-size:var(--p-fs); line-height:var(--p-lh); color:var(--p-color);}
+main dt {font-weight:bold;}
+main dd {margin-left:var(--indent);}
+main blockquote {margin-left:var(--indent);}
+main blockquote p:first-child:before {content:open-quote;}
+main blockquote p:last-child:after {content:close-quote;}
+main hr {border:0; height:1px; color:var(--border); background-color:var(--border); margin:-1px auto 0 auto; width:50%;}
+main hr:after {visibility:hidden; display:block; font-size:0; content:''; clear:both; height:0;}
+main table {width:100%; border-collapse:collapse; margin:var(--p-m); font-size:var(--p-fs); line-height:var(--p-lh);}
+main table caption {padding:0px 5px 0px 5px; font-weight:bold;}
+main th, td {padding:0px 5px 0px 5px; vertical-align:top;}
+main td {position:relative;}
+main td:before {content:''; display:block; background:var(--p-color); position:absolute; top:0; left:0; right:0; height:1px;}
+main th {font-weight:bold;}
+main sup, sub {vertical-align:baseline; position:relative; top:-0.4em;}
+main sub {top:0.4em;}
+main address {font-size:var(--p-fs); line-height:var(--p-lh); margin:var(--p-m);}
+main pre {font-size:var(--p-fs); line-height:var(--p-lh); margin:var(--p-m);}

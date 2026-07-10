@@ -10,7 +10,7 @@ function p(mixed $mass, bool $ret = false): string|false
 
 function getFile(string $fname, string $path = "res/"): string
 {
-  $res = file_get_contents("../".$path.$fname);
+  $res = file_get_contents($path.$fname);
   return((string)$res);
 }
 
@@ -51,7 +51,7 @@ $css=str_replace("url('noto_sans_display_italic.woff2')","url(".$noto_italic.")"
 $html = str_replace("<link rel=\"stylesheet\" href=\"res/rtf_mono.css\">\n","<style>".$css."</style>",$html);
 $html = str_replace("<script src=\"res/trix.js\"></script>","<script>".getFile("trix.js")."</script>",$html);
 p($html);
-file_put_contents("../distro/index.html",$html);
+file_put_contents("../index.html",$html);
 
 
 

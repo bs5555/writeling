@@ -1,0 +1,56 @@
+@font-face {font-family:'lilex'; src:url('lilex.woff2') format('woff2-variations'), url('lilex.woff2') format('woff2'); font-weight:400; font-style:normal;}
+@font-face {font-family:'lilex'; src:url('lilex_italic.woff2') format('woff2-variations'), url('lilex_italic.woff2') format('woff2'); font-weight:400; font-style:italic;}
+:root {--lilex:'lilex', 'Consolas', 'SF Mono', 'Roboto Mono', monospace;}
+main {--g-fs:1em; --p-fs:1.000em; --p-lh:1.470em; --p-m:1.470em 0 1.470em 0; --h1-fs:1.000em; --h1-lh:1.470em; --h1-m:2.940em 0 1.470em 0; --h2-fs:1.000em; --h2-lh:1.470em; --h2-m:2.940em 0 1.470em 0; --h3-fs:1.000em; --h3-lh:1.470em; --h3-m:1.470em 0 1.470em 0; --h4-fs:1.000em; --h4-lh:1.470em; --h4-m:1.470em 0 1.470em 0; --h5-fs:1.000em; --h5-lh:1.470em; --h5-m:1.470em 0 1.470em 0; --h6-fs:1.000em; --h6-lh:1.470em; --h6-m:1.470em 0 1.470em 0; --global-fontfamily:var(--lilex); --h1-fontfamily:var(--lilex); --h2-fontfamily:var(--lilex); --h3-fontfamily:var(--lilex); --h4-fontfamily:var(--lilex); --h5-fontfamily:var(--lilex); --h6-fontfamily:var(--lilex); --indent:1em;}
+main p {font-style:normal;}
+main h1 {font-style:normal; text-decoration:underline; text-decoration-thickness: 6px;}
+main h2 {font-style:normal; text-decoration:underline; text-decoration-thickness: 3px;}
+main h3 {font-style:normal; text-decoration:underline; text-decoration-thickness: 1px;}
+main h5 {font-style:normal; text-decoration:underline; text-decoration-thickness: 1px;}
+main h6 {font-style:normal; text-decoration:underline; text-decoration-thickness: 1px;}
+main p {font-variation-settings:'wght' 400;}
+main h1 {font-variation-settings:'wght' 700}
+main h2 {font-variation-settings:'wght' 650}
+main h3 {font-variation-settings:'wght' 600}
+main h4 {font-variation-settings:'wght' 600}
+main h5 {font-variation-settings:'wght' 600}
+main h6 {font-variation-settings:'wght' 600}
+main strong {font-variation-settings:'wght' 611, 'wdth' 100;}
+main b {font-variation-settings:'wght' 500, 'wdth' 100;}
+main em {font-style:italic;}
+main i {font-style:italic;}
+main {font-size:var(--g-fs); font-family:var(--global-fontfamily); color:var(--p-color); font-variant-ligatures:normal; font-optical-sizing:auto;}
+main p {font-size:var(--p-fs); line-height:var(--p-lh); margin:var(--p-m); hyphens:auto; text-align:left;}
+main h1 {font-size:var(--h1-fs); line-height:var(--h1-lh); margin:var(--h1-m); color:var(--h1-color); font-family:var(--h1-fontfamily); text-wrap:balance;}
+main h2 {font-size:var(--h2-fs); line-height:var(--h2-lh); margin:var(--h2-m); color:var(--h2-color); font-family:var(--h2-fontfamily); text-wrap:balance;}
+main h3 {font-size:var(--h3-fs); line-height:var(--h3-lh); margin:var(--h3-m); color:var(--h3-color); font-family:var(--h3-fontfamily); text-wrap:balance;}
+main h4 {font-size:var(--h4-fs); line-height:var(--h4-lh); margin:var(--h4-m); color:var(--h4-color); font-family:var(--h4-fontfamily); text-wrap:balance;}
+main h5 {font-size:var(--h5-fs); line-height:var(--h5-lh); margin:var(--h5-m); color:var(--h5-color); font-family:var(--h5-fontfamily); text-wrap:balance;}
+main h6 {font-size:var(--h6-fs); line-height:var(--h6-lh); margin:var(--h6-m); color:var(--h6-color); font-family:var(--h6-fontfamily); text-wrap:balance;}
+main a{text-decoration:underline; cursor:pointer;}
+main a:link {color:var(--link);}
+main a:visited {color:var(--visited);}
+main a:hover {color:var(--hover);}
+main a:active {color:var(--active);}
+main ol {list-style-type:decimal; margin:var(--p-m); margin-left:var(--indent); font-size:var(--p-fs); line-height:var(--p-lh);}
+main ul {list-style-type:disc; margin:var(--p-m); margin-left:var(--indent); font-size:var(--p-fs); line-height:var(--p-lh);}
+main li ol {margin:0 0 0 var(--indent); font-size:1em;}
+main li ul {margin:0 0 0 var(--indent); font-size:1em;}
+main dl {margin:var(--p-m); font-size:var(--p-fs); line-height:var(--p-lh); color:var(--p-color);}
+main dt {font-weight:bold;}
+main dd {margin-left:var(--indent);}
+main blockquote {margin-left:var(--indent);}
+main blockquote p:first-child:before {content:open-quote;}
+main blockquote p:last-child:after {content:close-quote;}
+main hr {border:0; height:1px; color:var(--border); background-color:var(--border); margin:-1px auto 0 auto; width:50%;}
+main hr:after {visibility:hidden; display:block; font-size:0; content:''; clear:both; height:0;}
+main table {width:100%; border-collapse:collapse; margin:var(--p-m); font-size:var(--p-fs); line-height:var(--p-lh);}
+main table caption {padding:0px 5px 0px 5px; font-weight:bold;}
+main th, td {padding:0px 5px 0px 5px; vertical-align:top;}
+main td {position:relative;}
+main td:before {content:''; display:block; background:var(--p-color); position:absolute; top:0; left:0; right:0; height:1px;}
+main th {font-weight:bold;}
+main sup, sub {vertical-align:baseline; position:relative; top:-0.4em;}
+main sub {top:0.4em;}
+main address {font-size:var(--p-fs); line-height:var(--p-lh); margin:var(--p-m);}
+main pre {font-size:var(--p-fs); line-height:var(--p-lh); margin:var(--p-m);}

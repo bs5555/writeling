@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+<meta charset="UTF-8">
+<title>writeling 0.1 alpha</title>
+<meta name="description" content="Free and open source minimal, distraction free text editor. Uses Trix from https://trix-editor.org. Created by Balazs Faa">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="res/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="stylesheet" href="res/trix.css">
+<link rel="stylesheet" href="res/g.css">
+<link rel="stylesheet" href="res/rtf_international.css">
+<link rel="stylesheet" href="res/rtf_classic.css">
+<link rel="stylesheet" href="res/rtf_mono.css">
+<script src="res/trix.js"></script>
+<script>
+
+const editorE1 = document.querySelector('trix-editor');
+
+
+Trix.config.blockAttributes.default.tagName = 'p'
+Trix.config.blockAttributes.default.breakOnReturn = true;
+
+Trix.Block.prototype.breaksOnReturn = function(){
+  const attr = this.getLastAttribute();
+  const config = Trix.getBlockConfig(attr ? attr : 'default');
+  return config ? config.breakOnReturn : false;
+};
+
+Trix.LineBreakInsertion.prototype.shouldInsertBlockBreak = function(){
+  if(this.block.hasAttributes() && this.block.isListItem() && !this.block.isEmpty()) {
+    return this.startLocation.offset > 0
+  } else {
+    return !this.shouldBreakFormattedBlock() ? this.breaksOnReturn : false;
+  }
+};
+
+Trix.config.blockAttributes.heading1 = {tagName: 'h1', terminal: true, breakOnReturn: true, group: false}
+Trix.config.blockAttributes.heading2 = {tagName: 'h2', terminal: true, breakOnReturn: true, group: false}
+Trix.config.blockAttributes.heading3 = {tagName: 'h3', terminal: true, breakOnReturn: true, group: false}
+Trix.config.blockAttributes.heading4 = {tagName: 'h4', terminal: true, breakOnReturn: true, group: false}
+Trix.config.blockAttributes.heading5 = {tagName: 'h5', terminal: true, breakOnReturn: true, group: false}
+Trix.config.blockAttributes.heading6 = {tagName: 'h6', terminal: true, breakOnReturn: true, group: false}
+Trix.config.blockAttributes.quote = {tagName: 'blockquote' ,nestable:!0}
+Trix.config.textAttributes.bold = {tagName: 'strong', inheritable: true, parser(editorE1) { const style = window.getComputedStyle(editorE1); return style.fontWeight === 'bold' || style.fontWeight >= 600}}
+Trix.config.textAttributes.italic = {tagName: 'em', inheritable: true, parser(editorE1) { const style = window.getComputedStyle(editorE1); return style.fontStyle === 'italic'}}
+Trix.config.textAttributes.q = {tagName:'q',inheritable:!0}
+Trix.config.toolbar.getDefaultHTML = function() { return(`  <span class="trix-button-group trix-button-group--block-tools" data-trix-button-group="block-tools">    <button type="button" class="trix-button trix-button--icon trix-button--icon-heading-1" data-trix-attribute="heading1" title="H1" tabindex="-1">H1</button>    <button type="button" class="trix-button trix-button--icon trix-button--icon-heading-2" data-trix-attribute="heading2" title="H2" tabindex="-1">H2</button>    <button type="button" class="trix-button trix-button--icon trix-button--icon-heading-3" data-trix-attribute="heading3" title="H3" tabindex="-1">H3</button>    <button type="button" class="trix-button trix-button--icon trix-button--icon-heading-4" data-trix-attribute="heading4" title="H4" tabindex="-1">H4</button>    <button type="button" class="trix-button trix-button--icon trix-button--icon-heading-5" data-trix-attribute="heading5" title="H5" tabindex="-1">H5</button>    <button type="button" class="trix-button trix-button--icon trix-button--icon-heading-6" data-trix-attribute="heading6" title="H6" tabindex="-1">H6</button>   <button type="button" class="trix-button trix-button--icon trix-button--icon-quote" data-trix-attribute="quote" title="block quote" tabindex="-1">block quote</button>  </span>  <span class="trix-button-group trix-button-group--text-tools" data-trix-button-group="text-tools">    <button type="button" class="trix-button trix-button--icon trix-button--icon-bold" data-trix-attribute="bold" data-trix-key="b" title="bold" tabindex="-1">bold</button>    <button type="button" class="trix-button trix-button--icon trix-button--icon-italic" data-trix-attribute="italic" data-trix-key="i" title="italic" tabindex="-1">italic</button>    <button type="button" class="trix-button trix-button--icon trix-button--icon-q" data-trix-attribute="q" title="q" tabindex="-1">q</button>  </span>    <span class="trix-button-group trix-button-group--insert-tools" data-trix-button-group="insert-tools">     </span>  <span class="trix-button-group trix-button-group--history-tools" data-trix-button-group="history-tools">    <button type="button" class="trix-button trix-button--icon trix-button--icon-undo" data-trix-action="undo" data-trix-key="z" title="undo" tabindex="-1">undo</button>    <button type="button" class="trix-button trix-button--icon trix-button--icon-redo" data-trix-action="redo" data-trix-key="shift+z" title="redo" tabindex="-1">redo</button>  </span>`);}
+
+
+</script>
+</head>
+<body>
+<div id="msgholder"></div>
+<header>
+  <div id="menu" tabindex="0" role="complementary" aria-label="Main menu and settings">
+    <button id="btnNew" class="trans"><span>New</span><span class="hotkey">Ctrl/Cmd+N</span></button>
+    <button id="btnOpen" class="trans"><span>Open…</span><span class="hotkey">Ctrl/Cmd+O</span></button>
+    <button id="btnSave" class="trans"><span>Save</span><span class="hotkey">Ctrl/Cmd+S</span></button>
+    <button id="btnSaveAs" class="trans"><span>Save As…</span><span class="hotkey">Ctrl/Cmd+Shift+S</span></button>
+    <button id="btnPrint" class="trans"><span>Print…</span><span class="hotkey">Ctrl/Cmd+P</span></button>
+    <div class="opts">
+      <div class="optitem">
+        <label label-for="lang">Text language</label>
+        <select id="lang" value="en">
+          <option value="en">English</option>
+          <option value="hu">Hungarian</option>
+          <option value="de">German</option>
+          <option value="fr">French</option>
+        </select>
+      </div>
+      <div class="optitem">
+        <label label-for="auto">Autosave</label>
+        <select id="auto" value="20">
+          <option value="0">no auto save</option>
+          <option value="20">every 20 sec</option>
+          <option value="60">every minute</option>
+          <option value="600">every 10 minute</option>
+        </select>
+      </div>
+    </div>
+     <div class="opts">
+      <div class="optitem">
+        <label label-for="style">Style</label>
+        <select id="style" value="international">
+          <option value="international">international</option>
+          <option value="classic">classic</option>
+          <option value="mono">typewriter</option>
+        </select>
+      </div>
+      <div class="optitem">
+        <label label-for="tone">Tone</label>
+        <select id="tone" value="auto">
+          <option value="auto">auto</option>
+          <option value="light">light</option>
+          <option value="dark">dark</option>
+        </select>
+      </div>
+      <div class="optitem">
+        <label label-for="fontsize">Font size</label>
+        <input id="fontsize" type="range" value="1" min="0.8" max="2" step="0.1">
+      </div>
+      <div class="optitem">
+        <label label-for="linelength">Line length</label>
+        <input id="linelength" type="range" value="70" min="50" max="120" step="1">
+      </div>
+    </div>
+  </div>
+</header>
+
+<span id="filename">untitled.html</span>
+
+<main class="international">
+  <input id="x" type="hidden" value="">
+  <trix-editor input="x"></trix-editor>
+</main>
+
+<input type="file" id="fileInput" accept=".html,.htm,text/html">
+
+<script>
+class stor
+{
+  set(key, value)
+  {
+    localStorage.setItem(key, value);
+  }
+
+  get(key, defValue)
+  {
+    let val = localStorage.getItem(key);
+    if(val === null) return(defValue);
+    return(val);
+  }
+}
+
+class xmsg
+{
+  toaster(msg, type = 'info')
+  {
+    document.querySelectorAll('.toast').forEach(el => el.remove());
+    const buf = document.createElement('div');
+    buf.className = `toast ${type}`;
+    buf.setAttribute('role', 'alert');
+    buf.innerHTML = `<p>${msg}</p>`;
+    document.body.appendChild(buf);
+    setTimeout(() => {
+      buf.remove();
+    }, 5000);
+  }
+
+  floater(title, txt, type = 'info')
+  {
+    // Remove any existing toasts/floats
+    document.querySelectorAll('.float').forEach(el => el.remove());
+
+    // Create main float element
+    const buf = document.createElement('div');
+    buf.className = `float ${type}`;
+    buf.setAttribute('role', 'alert');
+
+    buf.innerHTML = `
+      ${title ? `<p><strong>${title}</strong></p>` : ''}
+      ${txt ? `<p>${txt}</p>` : ''}
+    `;
+
+    // Create close button
+    const close = document.createElement('a');
+    close.className = 'close';
+    close.title = 'close';
+    close.href = 'javascript:void(0)';
+    close.innerHTML = '<span>close</span>';
+
+    // Close handler
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      buf.remove();
+    });
+
+    // Append everything
+    buf.appendChild(close);
+    const holder = document.getElementById('msgholder');
+    holder.appendChild(buf);
+  }
+
+  // Helper method (equivalent to your old this.cast)
+  cast(content, before = '', after = '')
+  {
+    return content ? `${before}${content}${after}` : '';
+  }
+}
+
+  const body = document.getElementsByTagName('body')[0];
+  const main = document.getElementsByTagName('main')[0];
+
+  const fileInput = document.getElementById('fileInput');
+  const filenameLabel = document.getElementById('filename');
+  const editor = document.querySelector('trix-editor');
+
+  const btnNew = document.getElementById('btnNew');
+  const btnOpen = document.getElementById('btnOpen');
+  const btnSave = document.getElementById('btnSave');
+  const btnSaveAs = document.getElementById('btnSaveAs');
+  const btnPrint = document.getElementById('btnPrint');
+  const selectLang = document.getElementById('lang');
+  const selectAuto = document.getElementById('auto');
+  const selectTone = document.getElementById('tone');
+  const selectStyle = document.getElementById('style');
+  const rangeFontSize = document.getElementById('fontsize');
+  const rangeLineLength = document.getElementById('linelength');
+  const menu = document.getElementById('menu');
+
+  let storage = new stor();
+  let msg = new xmsg();
+  let autosave = null;
+
+  let currentFileName = 'untitled.html';
+  let currentFileHandle = null; // File System Access API handle, if supported
+
+  const supportsFSAccess = 'showOpenFilePicker' in window && 'showSaveFilePicker' in window;
+
+  function buildHtmlDocument(bodyHtml)
+  {
+    finalContent = bodyHtml;
+    finalContent = finalContent.replaceAll('</h1>','</h1>\n');
+    finalContent = finalContent.replaceAll('</h2>','</h2>\n');
+    finalContent = finalContent.replaceAll('</h3>','</h3>\n');
+    finalContent = finalContent.replaceAll('</h4>','</h4>\n');
+    finalContent = finalContent.replaceAll('</h5>','</h5>\n');
+    finalContent = finalContent.replaceAll('</h6>','</h6>\n');
+    finalContent = finalContent.replaceAll('</p>','</p>\n');
+    return('<!DOCTYPE html>\n<html lang="'+selectLang.value+'">\n<head>\n<meta charset="UTF-8">\n<title>' +
+      escapeHtml(currentFileName.replace(/\.html?$/i, '')) +
+      '</title>\n</head>\n<body>\n<div style="max-width:75ch; margin:0 auto;">\n' + finalContent + '\n</div>\n</body>\n</html>\n');
+  }
+
+  function escapeHtml(str)
+  {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function setFileName(name)
+  {
+    currentFileName = name;
+    filenameLabel.textContent = name;
+  }
+
+  // ---------- NEW ----------
+  btnNew.addEventListener('click', () => {
+    if (editor.editor.getDocument().toString().trim().length > 0) {
+      if (!confirm('Discard current content and start a new document?')) return;
+    }
+    editor.editor.loadHTML('');
+    currentFileHandle = null;
+    setFileName('untitled.html');
+    editor.focus();
+  });
+
+  // ---------- OPEN ----------
+  btnOpen.addEventListener('click', async () => {
+    if (supportsFSAccess) {
+      try {
+        const [handle] = await window.showOpenFilePicker({
+          types: [{
+            description: 'HTML Files',
+            accept: { 'text/html': ['.html', '.htm'] }
+          }],
+          multiple: false
+        });
+        const file = await handle.getFile();
+        const text = await file.text();
+        loadContentIntoEditor(text);
+        currentFileHandle = handle;
+        setFileName(file.name);
+      } catch (err) {
+        if (err.name !== 'AbortError') console.error(err);
+      }
+    } else {
+      fileInput.click();
+      editor.focus();
+    }
+  });
+
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      loadContentIntoEditor(reader.result);
+      currentFileHandle = null;
+      setFileName(file.name);
+    };
+    reader.readAsText(file);
+    fileInput.value = '';
+  });
+
+  function extractLangRegex(html)
+  {
+      // Matches lang or xml:lang attribute, handles single/double quotes and whitespace
+      const regex = /<html\b[^>]*?\s+(?:lang|xml:lang)\s*=\s*(["'])(.*?)\1/i;
+      const match = html.match(regex);
+      return match ? match[2].trim() : null;
+  }
+
+  function loadContentIntoEditor(htmlText)
+  {
+    // Try to extract <body> content if it's a full HTML document
+    let content = htmlText;
+    const match = htmlText.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+    if (match) content = match[1];
+    editor.editor.loadHTML(content);
+    let lang = extractLangRegex(htmlText);
+    if(lang !== null)
+    {
+      selectLang.value=lang;
+      selectLang.dispatchEvent(new Event('change', { 'bubbles': true }));
+    }
+  }
+
+  // ---------- SAVE ----------
+  async function saveFile(forceNewLocation)
+  {
+    const bodyHtml = editor.innerHTML;
+    const fullDoc = buildHtmlDocument(bodyHtml);
+
+    if (supportsFSAccess) {
+      try {
+        if (!currentFileHandle || forceNewLocation) {
+          currentFileHandle = await window.showSaveFilePicker({
+            suggestedName: currentFileName,
+            types: [{
+              description: 'HTML Files',
+              accept: { 'text/html': ['.html'] }
+            }]
+          });
+          setFileName(currentFileHandle.name);
+        }
+        const writable = await currentFileHandle.createWritable();
+        await writable.write(fullDoc);
+        await writable.close();
+        flashStatus('Saved');
+      } catch (err) {
+        if (err.name !== 'AbortError') console.error(err);
+      }
+    } else {
+      // Fallback: trigger a download
+      const name = forceNewLocation
+        ? (prompt('File name', currentFileName) || currentFileName)
+        : currentFileName;
+      setFileName(name.endsWith('.html') ? name : name + '.html');
+      const blob = new Blob([fullDoc], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = currentFileName;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      flashStatus('Downloaded');
+      editor.focus();
+    }
+  }
+
+  function flashStatus(xmsg)
+  {
+    //const prev = filenameLabel.textContent;
+    //filenameLabel.textContent = xmsg + ' — ' + currentFileName;
+    //setTimeout(() => { filenameLabel.textContent = currentFileName; }, 1500);
+    msg.toaster(xmsg + ' — ' + currentFileName,'ok');
+
+  }
+
+  function changeTone(val)
+  {
+    body.classList.remove('auto');
+    body.classList.remove('light');
+    body.classList.remove('dark');
+    body.classList.add(val);
+    storage.set('tone',val);
+  }
+
+  function changeLang(val)
+  {
+    document.documentElement.setAttribute('lang',val);
+    storage.set('lang',val);
+  }
+
+  function changeStyle(val)
+  {
+    main.classList.remove('international');
+    main.classList.remove('classic');
+    main.classList.remove('mono');
+    main.classList.add(val);
+    storage.set('style',val);
+  }
+
+  function changeFontSize(val)
+  {
+    editor.style.fontSize = val+'em'
+    storage.set('fontsize',val);
+  }
+
+  function changeLineLength(val)
+  {
+    editor.style.maxWidth = val+'ch';
+    storage.set('linelength',val);
+  }
+
+  function changeAuto(val)
+  {
+    if(autosave !== null) clearTimeout(autosave);
+    if(val > 0) setTimeout(function(){
+      if(currentFileName  !== 'untitled.html') saveFile(false);
+    },parseInt(val) * 1000);
+    storage.set('auto',val);
+  }
+
+  btnSave.addEventListener('click', () => saveFile(false));
+  btnSaveAs.addEventListener('click', () => saveFile(true));
+  btnPrint.addEventListener('click', () => window.print());
+  selectLang.addEventListener('change', () => changeLang(selectLang.value));
+  selectAuto.addEventListener('change', () => changeAuto(selectAuto.value));
+  selectTone.addEventListener('change', () => changeTone(selectTone.value));
+  selectStyle.addEventListener('change', () => changeStyle(selectStyle.value));
+  rangeFontSize.addEventListener('input', () => changeFontSize(rangeFontSize.value));
+  rangeLineLength.addEventListener('input', () => changeLineLength(rangeLineLength.value));
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    if (!(e.metaKey || e.ctrlKey)) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    switch (e.key.toLowerCase())
+    {
+      case 's' : saveFile(e.shiftKey); break;
+      case 'o' : document.getElementById('btnOpen').click(); break;
+      case 'n' : document.getElementById('btnNew').click(); break;
+      case 'p' : window.print(); break;
+    }
+  });
+
+  if(!supportsFSAccess)
+  {
+    //const note = document.createElement('span');
+    //note.id = 'status';
+    //note.textContent = '(using download fallback — File System Access API not supported in this browser)';
+    //document.querySelector('header').appendChild(note);
+    msg.floater('Using download fallback at file save','File Systam API supported by webkit based browsers');
+  }
+
+  function init()
+  {
+    selectLang.value = storage.get('lang','en'); selectLang.dispatchEvent(new Event('change', { 'bubbles': true }));
+    selectAuto.value = storage.get('auto','20'); selectAuto.dispatchEvent(new Event('change', { 'bubbles': true }));
+    selectTone.value = storage.get('tone','auto'); selectTone.dispatchEvent(new Event('change', { 'bubbles': true }));
+    selectStyle.value = storage.get('style','international'); selectStyle.dispatchEvent(new Event('change', { 'bubbles': true }));
+    rangeFontSize.value = storage.get('fontsize','1'); rangeFontSize.dispatchEvent(new Event('input', { 'bubbles': true }));
+    rangeLineLength.value = storage.get('linelength','75'); rangeLineLength.dispatchEvent(new Event('input', { 'bubbles': true }));
+    editor.focus();
+  }
+
+  (function() {
+     init();
+  })();
+
+</script>
+
+</body>
+</html>
