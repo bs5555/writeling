@@ -3,7 +3,7 @@
 **A free, open source, distraction-free, single-file HTML text editor.**
 
 Write in clean, formatted HTML — no installation, no account, no tracking. Just open the file and start writing.
-Based on avesome [Trix editor](https://trix-editor.org).
+Based on awesome [Trix editor](https://trix-editor.org).
 
 ## Features
 
