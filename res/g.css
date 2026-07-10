@@ -109,6 +109,7 @@ body.light{
 }
 
 .trans{transition:all 0.3s;}
+
 body {margin: 0; font-family: var(--system); background: var(--bodybg); color: var(--bodycolor);}
 header {position: fixed; top: 0; z-index: 10;}
 
@@ -199,6 +200,41 @@ div.float.info a.close:before{color:var(--bodycolor);}
 div.float.error{background:var(--error); padding-left:3em; color:var(--bodycolor);}
 div.float.error:after{content:'\00F3'; font-family:var(--icon); display:block; position:absolute; top:0; left:0; padding:1em; color:var(--erroraccent); transform: scale(1.5); transform-origin: 50% 50%;}
 div.float.error a.close:before{color:var(--bodycolor);}
+
+main {font-size: var(--g-fs); font-family: var(--global-fontfamily); color: var(--p-color); font-variant-ligatures: normal; font-optical-sizing: auto;}
+main p {font-size: var(--p-fs); line-height: var(--p-lh); margin: var(--p-m); hyphens: auto;}
+main h1, main h2, main h3, main h4, main h5, main h6 {text-wrap: balance;}
+main h1 { font-size: var(--h1-fs); line-height: var(--h1-lh); margin: var(--h1-m); }
+main h2 { font-size: var(--h2-fs); line-height: var(--h2-lh); margin: var(--h2-m); }
+main h3 { font-size: var(--h3-fs); line-height: var(--h3-lh); margin: var(--h3-m); }
+main h4 { font-size: var(--h4-fs); line-height: var(--h4-lh); margin: var(--h4-m); }
+main h5 { font-size: var(--h5-fs); line-height: var(--h5-lh); margin: var(--h5-m); }
+main h6 { font-size: var(--h6-fs); line-height: var(--h6-lh); margin: var(--h6-m); }
+main a {text-decoration: underline; cursor: pointer;}
+main a:link    { color: var(--link); }
+main a:visited { color: var(--visited); }
+main a:hover   { color: var(--hover); }
+main a:active  { color: var(--active); }
+main ol, main ul {margin: var(--p-m); margin-left: var(--indent); font-size: var(--p-fs); line-height: var(--p-lh);}
+main li ol, main li ul {margin: 0 0 0 var(--indent); font-size: 1em;}
+main dl { margin: var(--p-m); font-size: var(--p-fs); line-height: var(--p-lh); color: var(--p-color); }
+main dt { font-weight: bold; }
+main dd { margin-left: var(--indent); }
+main blockquote { margin-left: var(--indent); }
+main blockquote p:first-child:before { content: open-quote; }
+main blockquote p:last-child:after  { content: close-quote; }
+main hr {border: 0; height: 1px; color: var(--border); background-color: var(--border); margin: -1px auto 0 auto; width: 50%;}
+main table {width: 100%; border-collapse: collapse; margin: var(--p-m); font-size: var(--p-fs); line-height: var(--p-lh);}
+main table caption { padding: 0 5px; font-weight: bold; }
+main th, main td { padding: 0 5px; vertical-align: top; }
+main th { font-weight: bold; }
+main sup { vertical-align: baseline; position: relative; top: -0.4em; }
+main sub { vertical-align: baseline; position: relative; top: 0.4em; }
+main address, main pre {font-size: var(--p-fs);line-height: var(--p-lh);margin: var(--p-m);}
+main strong, main b { font-variation-settings: 'wght' 640; }
+main i, main em { font-style: italic; }
+
+
 
 trix-editor{height:calc(100vh - 60px); overflow:auto; max-width: 75ch; margin:0 auto; padding:10px 50px 70vh 50px; box-sizing:border-box;}
 trix-editor {scrollbar-color: var(--border) var(--bodybg); border-left:1px dotted var(--bodycolorlight);border-left:1px solid color-mix(in lch, var(--bodycolor), transparent 90%)}

@@ -6,9 +6,12 @@
 <meta name="description" content="Free and open source minimal, distraction free text editor. Uses Trix from https://trix-editor.org. Created by Balazs Faa">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="res/favicon.svg" type="image/svg+xml" sizes="any">
-<link rel="stylesheet" type="text/css" href="res/trix.css">
-<link rel="stylesheet" type="text/css" href="res/g.css">
-<script type="text/javascript" src="res/trix.js"></script>
+<link rel="stylesheet" href="res/trix.css">
+<link rel="stylesheet" href="res/g.css">
+<link rel="stylesheet" href="res/rtf_international.css">
+<link rel="stylesheet" href="res/rtf_classic.css">
+<link rel="stylesheet" href="res/rtf_mono.css">
+<script src="res/trix.js"></script>
 <script>
 
 const editorE1 = document.querySelector('trix-editor');
@@ -45,7 +48,6 @@ Trix.config.toolbar.getDefaultHTML = function() { return(`  <span class="trix-bu
 
 
 </script>
-<link rel="stylesheet" id="contentstyle" href="res/rtf_classic.css">
 </head>
 <body>
 <div id="msgholder"></div>
@@ -107,7 +109,7 @@ Trix.config.toolbar.getDefaultHTML = function() { return(`  <span class="trix-bu
 
 <span id="filename">untitled.html</span>
 
-<main>
+<main class="international">
   <input id="x" type="hidden" value="">
   <trix-editor input="x"></trix-editor>
 </main>
@@ -187,6 +189,7 @@ class xmsg
 }
 
   const body = document.getElementsByTagName('body')[0];
+  const main = document.getElementsByTagName('main')[0];
 
   const fileInput = document.getElementById('fileInput');
   const filenameLabel = document.getElementById('filename');
@@ -385,7 +388,10 @@ class xmsg
 
   function changeStyle(val)
   {
-    document.getElementById('contentstyle').setAttribute('href','res/rtf_'+val+'.css');
+    main.classList.remove('international');
+    main.classList.remove('classic');
+    main.classList.remove('mono');
+    main.classList.add(val);
     storage.set('style',val);
   }
 
