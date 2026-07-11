@@ -50,8 +50,8 @@ No installation. No sign-up. Works where browsers works.
 ## Support / Feedback
 
 Found a bug? Have a feature request?  
-Open an [issue](https://github.com/YOURUSERNAME/writeling/issues) or just say hello!
+Open an [issue](https://github.com/bs5555/writeling/issues) or just say hello!
 
 ## License
 
-This project is open source and licensed under the [MIT License](LICENSE).
+This project is open source and licensed under the **MIT License**.
