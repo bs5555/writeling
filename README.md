@@ -40,7 +40,7 @@ No installation. No sign-up. Works where browsers works.
 
   ## Download
 
-[Download Latest Version](https://github.com/bs5555/writeling/index.html)
+[Download Latest Version](https://bs5555.github.io/writeling/)
 
 ## Links
 
