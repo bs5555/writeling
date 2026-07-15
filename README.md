@@ -2,33 +2,33 @@
 
 **A free, open source, distraction-free, single-file HTML text editor.**
 
-Write in clean, formatted HTML — no installation, no account, no tracking. Just open the file and start writing.
-Based on awesome [Trix editor](https://trix-editor.org).
+Write in clean, formatted HTML. No installation, no account, no tracking. Just open the file and start writing.
+Based on the awesome [Trix editor](https://trix-editor.org).
 
 ## Features
 
-- **Fully self-contained** — one single HTML file (no server needed)
+- **Fully self-contained**  a single HTML file (no server needed)
 - Gentle typography with 3 built-in themes (Classic, Mono, International)
 - Full rich text editing with HTML output
 - Save & Open files directly in your browser
-- Print or save as PDF formatted documents
+- Print or save formatted documents as PDF
 - Customizable UI and themes
 - Works completely offline
-- Privacy-first — nothing leaves your computer
+- Privacy-first: nothing leaves your computer
 
 ## Quick Start
 
 1. Download `index.html`
 2. Double-click the file (or drag it into your browser)
-3. Start writing!
+3. Start writing
 
-No installation. No sign-up. Works where browsers works.
+No installation. No sign-up. Works on anything what can run a browser.
 
 ## Themes
 
-- **Classic** — Elegant Garamond serif (book-like)
-- **Mono** — Clean monospace (Lilex) for focused writing
-- **International** — Modern sans-serif (Noto Sans)
+- **Classic** Elegant Garamond serif (book-like)
+- **Mono** Clean monospace (Lilex) for focused writing
+- **International** Modern sans-serif (Noto Sans)
 - Light and dark mode
 
 ## Hack it
